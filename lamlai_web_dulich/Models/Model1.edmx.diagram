@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7e33f6a122cb443a80f5dada545f26ae" Name="Diagram1">
+        <EntityTypeShape EntityType="DuLichDBModel.LoaiTour" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.MucGia" Width="1.5" PointX="4.875" PointY="0.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.TinhThanh" Width="1.5" PointX="0.625" PointY="2.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.TourDuLich" Width="1.5" PointX="2.875" PointY="0.5" />
+        <AssociationConnector Association="DuLichDBModel.FK_TourDuLich_LoaiTour" />
+        <AssociationConnector Association="DuLichDBModel.FK_TourDuLich_MucGia" />
+        <AssociationConnector Association="DuLichDBModel.FK_TourDuLich_TinhThanh" />
+        <EntityTypeShape EntityType="DuLichDBModel.TaiKhoan" Width="1.5" PointX="10.375" PointY="0.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.AlbumAnh" Width="1.5" PointX="7.375" PointY="3.375" />
+        <EntityTypeShape EntityType="DuLichDBModel.CamNangDuLich" Width="1.5" PointX="8.375" PointY="0.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.DichVu" Width="1.5" PointX="10.375" PointY="3.125" />
+        <EntityTypeShape EntityType="DuLichDBModel.HinhAnh" Width="1.5" PointX="5.125" PointY="3.625" />
+        <AssociationConnector Association="DuLichDBModel.FK_HinhAnh_AlbumAnh" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

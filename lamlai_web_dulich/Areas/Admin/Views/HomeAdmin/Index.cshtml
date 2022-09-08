@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/layoutadmin.cshtml";
+    var user = (lamlai_web_dulich.Models.TaiKhoan)System.Web.HttpContext.Current.Session["user"];
+}
+
+
+<div class="row" style="margin-top:70px">
+    <div class="col-md-12">
+        <h2>
+            @user.TenHienThi
+        </h2>
+    </div>
+</div>
+
+

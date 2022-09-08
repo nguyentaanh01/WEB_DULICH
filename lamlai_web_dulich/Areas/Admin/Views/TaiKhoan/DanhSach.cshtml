@@ -1,0 +1,79 @@
+﻿@model IEnumerable<lamlai_web_dulich.Models.TaiKhoan>
+
+@{
+    ViewBag.Title = "Danh sách tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/layoutadmin.cshtml";
+}
+
+<h2>DanhSach</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 style="color:blue;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite; padding: 15px 20px ">
+            DANH SÁCH TÀI KHOẢN
+        </h2>
+
+        <p>
+            <button type="button" class="btn btn-info">
+                <a href="/Admin/TinhThanh/ThemMoi">Thêm mới</a>
+            </button>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenDangNhap)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MatKhau)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenHienThi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoDienThoai)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HinhAnh)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenDangNhap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatKhau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenHienThi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
+                        <a href="~/Admin/TaiKhoan/CapNhatAnh?tenDangNhap=@item.TenDangNhap"><img src="@item.HinhAnh" style="height:100px; width:100px" /></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+

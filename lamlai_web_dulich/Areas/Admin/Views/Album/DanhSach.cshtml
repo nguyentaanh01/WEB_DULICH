@@ -1,0 +1,64 @@
+﻿@model IEnumerable<lamlai_web_dulich.Models.AlbumAnh>
+
+@{
+    ViewBag.Title = "Danh Sách";
+    Layout = "~/Areas/Admin/Views/Shared/layoutadmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12" style="padding-top:50px">
+        <h2 style="color:blue;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite; padding: 15px 20px ">
+            DANH SÁCH ALBUM ẢNH
+        </h2>
+
+        <p>
+            <button type="button" class="btn btn-info">
+                <a href="~/Admin/Album/ThemMoi">Thêm Mới</a>
+            </button>
+
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenAlbum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NguoiDang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiGian)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MoTa)
+                </th>
+                <th>TOOL</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="~/Admin/HinhAnh/DanhSach?idAlbum=@item.ID">@Html.DisplayFor(modelItem => item.TenAlbum)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NguoiDang)
+                    </td>
+                    <td>
+                        @string.Format("{0:dd/MM/yyyy}", item.ThoiGian)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MoTa)
+                    </td>
+                    <td>
+                        <a href="~/Admin/Album/CapNhat?idAlbum=@item.ID">Update</a>|
+                        <a href="#" style="color:red" onclick="if (confirm('ban co muon xoa khong') == true) { location.href = '/Admin/Album/Xoa?idAlbum=@item.ID' }">delete</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

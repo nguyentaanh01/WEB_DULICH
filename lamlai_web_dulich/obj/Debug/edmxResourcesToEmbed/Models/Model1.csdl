@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DuLichDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DuLichDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LoaiTours" EntityType="DuLichDBModel.LoaiTour" />
+    <EntitySet Name="MucGias" EntityType="DuLichDBModel.MucGia" />
+    <EntitySet Name="TinhThanhs" EntityType="DuLichDBModel.TinhThanh" />
+    <EntitySet Name="TourDuLiches" EntityType="DuLichDBModel.TourDuLich" />
+    <AssociationSet Name="FK_TourDuLich_LoaiTour" Association="DuLichDBModel.FK_TourDuLich_LoaiTour">
+      <End Role="LoaiTour" EntitySet="LoaiTours" />
+      <End Role="TourDuLich" EntitySet="TourDuLiches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDuLich_MucGia" Association="DuLichDBModel.FK_TourDuLich_MucGia">
+      <End Role="MucGia" EntitySet="MucGias" />
+      <End Role="TourDuLich" EntitySet="TourDuLiches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDuLich_TinhThanh" Association="DuLichDBModel.FK_TourDuLich_TinhThanh">
+      <End Role="TinhThanh" EntitySet="TinhThanhs" />
+      <End Role="TourDuLich" EntitySet="TourDuLiches" />
+    </AssociationSet>
+    <EntitySet Name="TaiKhoans" EntityType="DuLichDBModel.TaiKhoan" />
+    <EntitySet Name="AlbumAnhs" EntityType="DuLichDBModel.AlbumAnh" />
+    <EntitySet Name="CamNangDuLiches" EntityType="DuLichDBModel.CamNangDuLich" />
+    <EntitySet Name="DichVus" EntityType="DuLichDBModel.DichVu" />
+    <EntitySet Name="HinhAnhs" EntityType="DuLichDBModel.HinhAnh" />
+    <AssociationSet Name="FK_HinhAnh_AlbumAnh" Association="DuLichDBModel.FK_HinhAnh_AlbumAnh">
+      <End Role="AlbumAnh" EntitySet="AlbumAnhs" />
+      <End Role="HinhAnh" EntitySet="HinhAnhs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LoaiTour">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourDuLiches" Relationship="DuLichDBModel.FK_TourDuLich_LoaiTour" FromRole="LoaiTour" ToRole="TourDuLich" />
+  </EntityType>
+  <EntityType Name="MucGia">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourDuLiches" Relationship="DuLichDBModel.FK_TourDuLich_MucGia" FromRole="MucGia" ToRole="TourDuLich" />
+  </EntityType>
+  <EntityType Name="TinhThanh">
+    <Key>
+      <PropertyRef Name="ID_Tinh" />
+    </Key>
+    <Property Name="ID_Tinh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourDuLiches" Relationship="DuLichDBModel.FK_TourDuLich_TinhThanh" FromRole="TinhThanh" ToRole="TourDuLich" />
+  </EntityType>
+  <EntityType Name="TourDuLich">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TieuDe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SoNgayDiTour" Type="Double" />
+    <Property Name="LichDinhKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DiaDiem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoNguoiToiDa" Type="Int32" />
+    <Property Name="GiaTour" Type="Double" />
+    <Property Name="BaiViet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="idTinh" Type="Int32" />
+    <Property Name="idLoaiTour" Type="Int32" />
+    <Property Name="id_MucGia" Type="Int32" />
+    <NavigationProperty Name="LoaiTour" Relationship="DuLichDBModel.FK_TourDuLich_LoaiTour" FromRole="TourDuLich" ToRole="LoaiTour" />
+    <NavigationProperty Name="MucGia" Relationship="DuLichDBModel.FK_TourDuLich_MucGia" FromRole="TourDuLich" ToRole="MucGia" />
+    <NavigationProperty Name="TinhThanh" Relationship="DuLichDBModel.FK_TourDuLich_TinhThanh" FromRole="TourDuLich" ToRole="TinhThanh" />
+  </EntityType>
+  <Association Name="FK_TourDuLich_LoaiTour">
+    <End Type="DuLichDBModel.LoaiTour" Role="LoaiTour" Multiplicity="0..1" />
+    <End Type="DuLichDBModel.TourDuLich" Role="TourDuLich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiTour">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TourDuLich">
+        <PropertyRef Name="idLoaiTour" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDuLich_MucGia">
+    <End Type="DuLichDBModel.MucGia" Role="MucGia" Multiplicity="0..1" />
+    <End Type="DuLichDBModel.TourDuLich" Role="TourDuLich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MucGia">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TourDuLich">
+        <PropertyRef Name="id_MucGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDuLich_TinhThanh">
+    <End Type="DuLichDBModel.TinhThanh" Role="TinhThanh" Multiplicity="0..1" />
+    <End Type="DuLichDBModel.TourDuLich" Role="TourDuLich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhThanh">
+        <PropertyRef Name="ID_Tinh" />
+      </Principal>
+      <Dependent Role="TourDuLich">
+        <PropertyRef Name="idTinh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="TenDangNhap" />
+    </Key>
+    <Property Name="TenDangNhap" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TenHienThi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AlbumAnh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenAlbum" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiDang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiGian" Type="DateTime" Precision="3" />
+    <Property Name="MoTa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HinhAnhs" Relationship="DuLichDBModel.FK_HinhAnh_AlbumAnh" FromRole="AlbumAnh" ToRole="HinhAnh" />
+  </EntityType>
+  <EntityType Name="CamNangDuLich">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TieuDe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TomTat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayViet" Type="DateTime" Precision="0" />
+    <Property Name="HienTrangChu" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DichVu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LinkSeo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HoatDong" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="HinhAnh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idAlbum" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AlbumAnh" Relationship="DuLichDBModel.FK_HinhAnh_AlbumAnh" FromRole="HinhAnh" ToRole="AlbumAnh" />
+  </EntityType>
+  <Association Name="FK_HinhAnh_AlbumAnh">
+    <End Type="DuLichDBModel.AlbumAnh" Role="AlbumAnh" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DuLichDBModel.HinhAnh" Role="HinhAnh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlbumAnh">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HinhAnh">
+        <PropertyRef Name="idAlbum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

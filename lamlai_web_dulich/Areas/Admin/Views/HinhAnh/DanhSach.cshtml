@@ -1,0 +1,63 @@
+﻿@model IEnumerable<lamlai_web_dulich.Models.HinhAnh>
+
+@{
+    ViewBag.Title = "Danh Sách Hình Ảnh";
+    Layout = "~/Areas/Admin/Views/Shared/layoutadmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12" style="padding-top:30px">
+        <h2 style="color:blue;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite; padding: 15px 20px ">
+            DANH SÁCH HÌNH ẢNH
+        </h2>
+
+        <p>
+            <button type="button" class="btn btn-info">
+                <a href="~/Admin/HinhAnh/ThemMoi?id">Thêm Mới</a>
+            </button>
+
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Tên AlBum
+                </th>
+                <th>
+                    Hình Ảnh
+                </th>
+                <th>
+                    Tiêu Đề
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            var album = new lamlai_web_dulich.Models.mapAlbum().ChiTiet(item.idAlbum);
+                            if (album != null)
+                            {
+                                <span>@album.TenAlbum</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <img style="height:150px; width:300px" src="@item.Url" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TieuDe)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+

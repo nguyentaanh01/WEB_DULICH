@@ -1,0 +1,135 @@
+﻿@model List<lamlai_web_dulich.Models.TourDuLich>
+@{
+    ViewBag.Title = "TimKiem";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+
+<h2>TimKiem</h2>
+@* Form tìm kiếm*@
+<div class="container">
+    <!--Tim Kiem-->
+    <div class="col-12" style="padding:10px 100px ">
+
+        <div class="col-12" style="padding: 10px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+            <form action="~/Home/TimKiem" method="get">
+                <!-- Loại tour-->
+                <div class="col-2" style="padding: 0px 10px;">
+                    <select style="width:100%;height:35px" name="idLoaiTour">
+                        <option>Tất cả loại tour</option>
+                        @foreach (var item in new lamlai_web_dulich.Models.mapLoaiTour().DanhSach())
+                        {
+                            <option value="@item.ID" @Html.Raw(item.ID == ViewBag.idLoaiTour?"selected":"")>@item.Ten</option>
+                        }
+                    </select>
+                </div>
+                <!-- Tỉnh-->
+                <div class="col-2" style="padding: 0px 10px;">
+                    <select style="width:100%;height:35px" name="idTinh">
+                        <option>Tất cả khu vực</option>
+                        @foreach (var item in new lamlai_web_dulich.Models.mapTinhThanh().DanhSach())
+                        {
+                            <option value="@item.ID_Tinh" @Html.Raw(item.ID_Tinh == ViewBag.idTinh?"selected":"")>@item.Ten</option>
+                        }
+                    </select>
+                </div>
+                <!-- Ngày khởi hành-->
+                <div class="col-2" style="padding: 0px 10px;">
+                    <input type="date" value="Ngày khởi hành" style="width:100%;height:35px">
+                </div>
+                <!-- Giảm giá-->
+                <div class="col-2" style="padding: 0px 10px;">
+                    <input type="text" placeholder="Giảm giá" style="width:100%;height:35px">
+                </div>
+                <!-- Mức giá-->
+                <div class="col-2" style="padding: 0px 10px;">
+                    <select style="width:100%;height:35px" name="idMucGia">
+                        <option>Tất cả mức giá</option>
+                        @foreach (var item in new lamlai_web_dulich.Models.mapMucGia().DanhSach())
+                        {
+                            <option value="@item.ID" @Html.Raw(item.ID == ViewBag.idMucGia?"selected":"")>@item.Gia</option>
+                        }
+                    </select>
+                </div>
+                <!-- Nút submit-->
+                <div class="col-2" style="padding: 0px 10px;">
+                    <button type="submit" style="    width: 100%;height: 35px; background: green;border: none;color: white;font-size: 13pt;">Xem giá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class=" col-12" style="padding:10px 100px">
+    <!--TOUR GIÁ SỐC-->
+    <div class="col-12" style="text-align:center">
+        <h1>
+            <span style="font-size:50px;color:#ffc700">Kết Quả Hiển Thị</span>
+        </h1>
+
+    </div>
+
+    <!--Hang 1-->
+    <div class="col-12" ">
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <div class="col-12" style="padding:10px">
+                    <img style="  width: 100%;height: 300px;" src="@item.HinhAnh">
+                </div>
+
+                <div class="col-12 title_color" style="padding:15px">
+                    <a>@item.TieuDe</a>
+                </div>
+                <div class="col-12" style="padding:5px 15px">
+                    <div class="col-6"> <i class="fa fa-calendar"></i><span>@item.LichDinhKy</span></div>
+                    <div class="col-6">@item.SoNgayDiTour Ngày</div>
+                </div>
+                <div class="col-12" style="padding:5px 15px">
+                    <div class="col-6"> <i class="fa fa-calendar"></i><span>@item.DiaDiem</span></div>
+                    <div class="col-6">Số chỗ: @item.SoNguoiToiDa</div>
+                </div>
+                <div class="col-12" style="padding:5px 15px"> 
+                    <div class="col-6"> <i class="fa fa-calendar"></i><span>@item.GiaTour VNĐ</span></div>
+                    <div class="col-6"><a>Xem chi tiết</a></div>
+                </div>
+
+            </div>
+        }
+        <div class="col-4">
+            <div class="relative">
+                <img style="  width: 450px;height: 300px;" src="https://vietnamtravel.net.vn/timthumb.php?src=/media/images/ha-noi-ha-long-sapa/logo/u23-viet-nam-fansipan-logo.jpg&w=402&h=262&q=75">
+                <div class="absolute">
+                    <img style=" width: 250px;height: 200px;" src="https://vietnamtravel.net.vn/assets/desktop/images/event/chao-he.png">
+                </div>
+            </div>
+
+            <div class="col-12 title_color">
+                <a>Hà Nội - Hạ Long - Sapa - Fansipan 4n/3d (Tour cao cấp Bao Gồm cả vé Máy Bay)</a>
+            </div>
+            <div class="col-12">
+                <div class="col-6"> <i class="fa fa-calendar"></i><span>Hàng ngày</span></div>
+                <div class="col-6">4 Ngày</div>
+            </div>
+            <div class="col-12">
+                <div class="col-6"> <i class="fa fa-calendar"></i><span>Hà Nội - Đà Nẵng - TP.HCM</span></div>
+                <div class="col-6">Số chỗ: 35</div>
+            </div>
+
+            <div class="col-12">
+                <a>Đã bao gồm vé Máy Bay, trọn gói không phát sinh chi ph</a>
+            </div>
+            <div class="col-12">
+                <div class="col-6"> <i class="fa fa-calendar"></i><span>7.490.000 VNĐ</span></div>
+                <div class="col-6"><a>Xem chi tiết</a></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

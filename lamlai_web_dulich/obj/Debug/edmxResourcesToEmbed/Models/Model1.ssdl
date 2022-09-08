@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DuLichDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AlbumAnh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenAlbum" Type="nvarchar" MaxLength="500" />
+    <Property Name="NguoiDang" Type="nvarchar" MaxLength="50" />
+    <Property Name="ThoiGian" Type="datetime" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="CamNangDuLich">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="500" />
+    <Property Name="TomTat" Type="nvarchar" MaxLength="500" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="500" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="NgayViet" Type="date" />
+    <Property Name="HienTrangChu" Type="bit" />
+  </EntityType>
+  <EntityType Name="DichVu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDichVu" Type="nvarchar" MaxLength="50" />
+    <Property Name="LinkSeo" Type="nvarchar" MaxLength="500" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="500" />
+    <Property Name="HoatDong" Type="bit" />
+  </EntityType>
+  <EntityType Name="HinhAnh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idAlbum" Type="int" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="500" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LoaiTour">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MucGia">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gia" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="TenDangNhap" />
+    </Key>
+    <Property Name="TenDangNhap" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="500" />
+    <Property Name="TenHienThi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" />
+    <Property Name="SoDienThoai" Type="nvarchar" MaxLength="500" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TinhThanh">
+    <Key>
+      <PropertyRef Name="ID_Tinh" />
+    </Key>
+    <Property Name="ID_Tinh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TourDuLich">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="500" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="500" />
+    <Property Name="SoNgayDiTour" Type="float" />
+    <Property Name="LichDinhKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="DiaDiem" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoNguoiToiDa" Type="int" />
+    <Property Name="GiaTour" Type="float" />
+    <Property Name="BaiViet" Type="nvarchar(max)" />
+    <Property Name="idTinh" Type="int" />
+    <Property Name="idLoaiTour" Type="int" />
+    <Property Name="id_MucGia" Type="int" />
+  </EntityType>
+  <Association Name="FK_HinhAnh_AlbumAnh">
+    <End Role="AlbumAnh" Type="Self.AlbumAnh" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="HinhAnh" Type="Self.HinhAnh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlbumAnh">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HinhAnh">
+        <PropertyRef Name="idAlbum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDuLich_LoaiTour">
+    <End Role="LoaiTour" Type="Self.LoaiTour" Multiplicity="0..1" />
+    <End Role="TourDuLich" Type="Self.TourDuLich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiTour">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TourDuLich">
+        <PropertyRef Name="idLoaiTour" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDuLich_MucGia">
+    <End Role="MucGia" Type="Self.MucGia" Multiplicity="0..1" />
+    <End Role="TourDuLich" Type="Self.TourDuLich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MucGia">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TourDuLich">
+        <PropertyRef Name="id_MucGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDuLich_TinhThanh">
+    <End Role="TinhThanh" Type="Self.TinhThanh" Multiplicity="0..1" />
+    <End Role="TourDuLich" Type="Self.TourDuLich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhThanh">
+        <PropertyRef Name="ID_Tinh" />
+      </Principal>
+      <Dependent Role="TourDuLich">
+        <PropertyRef Name="idTinh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DuLichDBModelStoreContainer">
+    <EntitySet Name="AlbumAnh" EntityType="Self.AlbumAnh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CamNangDuLich" EntityType="Self.CamNangDuLich" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HinhAnh" EntityType="Self.HinhAnh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiTour" EntityType="Self.LoaiTour" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MucGia" EntityType="Self.MucGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TourDuLich" EntityType="Self.TourDuLich" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_HinhAnh_AlbumAnh" Association="Self.FK_HinhAnh_AlbumAnh">
+      <End Role="AlbumAnh" EntitySet="AlbumAnh" />
+      <End Role="HinhAnh" EntitySet="HinhAnh" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDuLich_LoaiTour" Association="Self.FK_TourDuLich_LoaiTour">
+      <End Role="LoaiTour" EntitySet="LoaiTour" />
+      <End Role="TourDuLich" EntitySet="TourDuLich" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDuLich_MucGia" Association="Self.FK_TourDuLich_MucGia">
+      <End Role="MucGia" EntitySet="MucGia" />
+      <End Role="TourDuLich" EntitySet="TourDuLich" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDuLich_TinhThanh" Association="Self.FK_TourDuLich_TinhThanh">
+      <End Role="TinhThanh" EntitySet="TinhThanh" />
+      <End Role="TourDuLich" EntitySet="TourDuLich" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
